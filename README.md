@@ -1,1 +1,1 @@
-I care expansion
+A compassionate real-time chatbot connecting students to mental health support.
