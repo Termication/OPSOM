@@ -8,13 +8,10 @@ export default function DemoSection() {
             <div className="flex items-center justify-center ">
                 <CogIcon className="w-6 h-6 text-gray-900 animate-pulse" />
             </div>
-            <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-center text-gray-900 mt-8">
-                How does it work? 
-            </h3>
-
-            <p className="text-lg sm:text-xl lg:text-2xl font-normal text-center text-gray-700 mt-4 max-w-3xl mx-auto">
-                Watch a demo of <span className="text-green-600">Opsom</span> in action.
+            <p className="text-center text-gray-600 dark:text-gray-300 text-base sm:text-lg mb-4">
+            Discover the magic of <span className="font-semibold text-gray-900 dark:text-white">Opsom</span> — your PDF, summarized in seconds.
             </p>
+
 
             <div className="flex items-center justify-center mt-8">
  

@@ -125,7 +125,13 @@
   code, pre {
     font-family: var(--font-geist-mono), monospace;
   }
-
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
   h1 {
     @apply text-4xl font-bold tracking-tight lg:text-5xl;
   }
