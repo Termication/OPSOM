@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { Shredder } from 'lucide-react';
+import { Button } from "../ui/button";
 
 export default function Header() {
+
+    const isLoggedIn = true;
+
     return <nav className="no-underline container flex items-center justify-between py-4 lg:px-8 px-2 mx-auto">
         
         <div className="flex lg:flex-1">
@@ -15,11 +19,18 @@ export default function Header() {
 
         <div className="flex lg:justify-center gap-4 lg:gap-12 lg:items-center">
             <Link href="/#pricing" className="no-underline">Pricing</Link>
-            <Link href="/#dashboard" className="no-underline">Your Summaries</Link>
+            {isLoggedIn && <Link href="/#dashboard" className="no-underline">Your Summaries</Link>}
         </div>
 
         <div className="flex lg:justify-end  lg:flex-1"> 
-            <Link href="/#sign-in">Sign In</Link>
+            {isLoggedIn ? (<div className="flex gap-2 items-center">
+                <Link href="/upload" className="no-underline">Upload PDF</Link>
+                <div className="">Pro</div>
+                <Button>Sign Out</Button>
+            </div> ) : (
+            <div>
+            <Link href="/#sign-in" className="no-underline">Sign In</Link>
+            </div>)}
         </div>
     </nav>;
 }
