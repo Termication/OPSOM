@@ -17,7 +17,14 @@ export default function HeroSection() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-center text-gray-900 mt-8">
-                Summarize PDFs into key points <br />
+                Summarize PDFs into key  
+                <span className="relative inline-block">
+                    <span className="relative z-10 px-4"> points </span><br />
+                    <span className="absolute inset-0 bg-green-200/50 -rotate-2
+                    rounded-lg transform -skew-y-1
+                    "></span>
+                    
+                </span>
                 and insights.
             </h1>
             <h2 className="text-lg sm:text-xl lg:text-2xl font-normal text-center text-gray-700 mt-4 max-w-3xl">
@@ -29,7 +36,7 @@ export default function HeroSection() {
             <Button
             asChild
             variant="link"
-            className="mt-6 rounded-full px-6 py-3 text-base sm:text-lg lg:text-xl font-semibold text-white bg-primary hover:bg-primary/90 hover:no-underline transition duration-200 ease-in-out"
+            className="mt-6 rounded-full px-6 py-3 text-base sm:text-lg lg:text-xl font-semibold text-white bg-linear-to-r from-slate-700 to-green-900 hover:from-green-800 hover:to-slate-900 hover:no-underline"
             >
             <Link
                 href="/#pricing"
