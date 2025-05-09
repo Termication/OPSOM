@@ -1,17 +1,22 @@
 import { Button } from "@/components/ui/button";
+import { Sparkles } from 'lucide-react';
 
 export default function HeroSection() {
     return <section>
-        <div className="di">
+        <div className="">
+            <div className="flex">
+                <Sparkles className="h-6 w-6 text-green-900 animate-pulse" />
+                <p>Powerd by AI</p>
+            </div>
 
-            <p>Powerd by AI</p>
             <h1>
-                Summarize PDFs <br />
-                with AI
+                Summarize PDFs into key points <br />
+                and insights.
             </h1>
             <h2>
-                Summarize any PDF document in seconds. <br />
-                Get the key points and insights you need to know.
+                Upload your PDF and get a summary in seconds.
+                <br />
+                Save time and effort by quickly extracting key information from your PDFs.
             </h2>
 
             <Button>
