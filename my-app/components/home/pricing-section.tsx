@@ -31,7 +31,7 @@ export default function PricingSection() {
           {/* Pro Plan */}
           <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-md ring-2 ring-green-400">
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Pro</h3>
-            <p className="mt-2 text-2xl font-bold text-emerald-600">ZAR 60 / mo</p>
+            <p className="mt-2 text-2xl font-bold text-emerald-600">ZAR 60 / month</p>
             <ul className="mt-4 text-sm text-gray-700 dark:text-gray-300 space-y-2">
               <li>✅ Unlimited PDFs</li>
               <li>✅ Priority processing</li>
