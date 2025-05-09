@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function PricingSection() {
   return (
     <section>
@@ -19,6 +21,7 @@ export default function PricingSection() {
             <ul className="mt-4 text-sm text-gray-700 dark:text-gray-300 space-y-2">
               <li>✅ 7 PDFs per day</li>
               <li>✅ Access core features</li>
+              <li>✅ Standard processing speed</li>
             </ul>
             <button className="mt-6 w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg">
               Get Started
@@ -35,7 +38,7 @@ export default function PricingSection() {
               <li>✅ Early access to features</li>
             </ul>
             <button className="mt-6 w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-lg">
-              Upgrade Now
+              <Link href={"/#payment"}>Upgrade Now </Link>
             </button>
           </div>
         </div>
