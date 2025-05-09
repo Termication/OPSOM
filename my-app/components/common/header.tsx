@@ -2,22 +2,23 @@ import Link from "next/link";
 import { Shredder } from 'lucide-react';
 
 export default function Header() {
-    return <nav className="container flex items-center justify-between py-4 lg:px-8 px-2 mx-auto">
+    return <nav className="no-underline container flex items-center justify-between py-4 lg:px-8 px-2 mx-auto">
         
         <div className="flex lg:flex-1">
-            <Link href="/">
+            <Link href="/" className="no-underline flex items-center gap-2 text-xl font-bold text-gray-900">
             <Shredder className="w-5 h-5 lg:w-8 lg:h-8
             text-gray-900 hover:rotate-12
             transition duration-200 ease-in-out" />
-            Opsom
+            <span className="font-extrabold lg:text-xl text-gray-900">Opsom</span>
             </Link>
         </div>
 
-        <div>
-            <Link href="/#pricing">Pricing</Link>
+        <div className="flex lg:justify-center gap-4 lg:gap-12 lg:items-center">
+            <Link href="/#pricing" className="no-underline">Pricing</Link>
+            <Link href="/#dashboard" className="no-underline">Your Summaries</Link>
         </div>
 
-        <div>
+        <div className="flex lg:justify-end  lg:flex-1"> 
             <Link href="/#sign-in">Sign In</Link>
         </div>
     </nav>;
