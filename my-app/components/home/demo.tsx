@@ -29,23 +29,44 @@ const steps = [
 
 export default function Demo() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(false);
 
+  // Detect screen size
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % steps.length);
-    }, 3000); // Change every 3 seconds
-
-    return () => clearInterval(interval);
+    const checkScreen = () => setIsDesktop(window.innerWidth >= 640);
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
   }, []);
 
+  // Autoplay only on desktop
+  useEffect(() => {
+    if (!isDesktop) return;
+
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % steps.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [isDesktop]);
+
   return (
-    <section className="py-12 px-4  bg-transparent">
+    <section className="py-12 px-4 bg-transparent">
       <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 dark:text-white mb-8">
         How Opsom Works
       </h2>
 
-      <div className="relative flex justify-center">
-        <div className="flex gap-6 transition-transform duration-500" style={{ transform: `translateX(-${activeIndex * 280}px)` }}>
+      <div className="relative overflow-x-auto sm:overflow-visible">
+        <div
+          className={clsx("flex gap-6 transition-transform duration-500", {
+            "sm:justify-center": true,
+          })}
+          style={{
+            transform: isDesktop
+              ? `translateX(-${activeIndex * 280}px)`
+              : "none",
+          }}
+        >
           {steps.map((step, i) => (
             <div
               key={i}
@@ -53,8 +74,8 @@ export default function Demo() {
                 "w-[260px] shrink-0 rounded-2xl border p-6 shadow-md transition-all duration-300",
                 "bg-white border-gray-200 text-gray-900 dark:bg-gray-900 dark:border-gray-800 dark:text-white",
                 {
-                  "ring-2 ring-green-400 scale-105": i === activeIndex,
-                  "opacity-60": i !== activeIndex,
+                  "ring-2 ring-green-400 scale-105": isDesktop && i === activeIndex,
+                  "opacity-60": isDesktop && i !== activeIndex,
                 }
               )}
             >
