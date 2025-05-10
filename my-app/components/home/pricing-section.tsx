@@ -17,13 +17,13 @@ export default function PricingSection() {
           {/* Basic Plan */}
           <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm">
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Basic</h3>
-            <p className="mt-2 text-2xl font-bold text-green-600">Free</p>
+            <p className="mt-2 text-2xl font-bold text-emerald-600">Free</p>
             <ul className="mt-4 text-sm text-gray-700 dark:text-gray-300 space-y-2">
               <li>✅ 7 PDFs per day</li>
               <li>✅ Access core features</li>
               <li>✅ Standard processing speed</li>
             </ul>
-            <button className="mt-6 w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg">
+            <button className="mt-6 w-full bg-emerald-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg">
               Get Started
             </button>
           </div>
@@ -31,13 +31,13 @@ export default function PricingSection() {
           {/* Pro Plan */}
           <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-md ring-2 ring-green-400">
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Pro</h3>
-            <p className="mt-2 text-2xl font-bold text-emerald-600">ZAR 60 / month</p>
+            <p className="mt-2 text-2xl font-bold text-green-600">ZAR 60 / month</p>
             <ul className="mt-4 text-sm text-gray-700 dark:text-gray-300 space-y-2">
               <li>✅ Unlimited PDFs</li>
               <li>✅ Priority processing</li>
               <li>✅ Early access to features</li>
             </ul>
-            <button className="mt-6 w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-lg">
+            <button className="mt-6 w-full bg-green-600 hover:bg-green-300 text-white font-semibold py-2 px-4 rounded-lg">
               <Link href={"/#payment"}>Upgrade Now </Link>
             </button>
           </div>
