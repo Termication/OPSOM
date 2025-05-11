@@ -27,11 +27,18 @@ export default function UploadHeader() {
     }
 
     const validatedFields = schema.safeParse({ file });
+
+    console.log(validatedFields);
+
     if (!validatedFields.success) {
-      console.log(validatedFields.error.flatten().
-      fieldErrors.file?.[0]) ?? "Invalid file.";
-      return;
-    }
+        console.log(validatedFields.error.flatten().fieldErrors.file?.[0] ?? "Invalid file.");
+
+    };
+
+    if (validatedFields.success) {
+  console.log("File uploaded:", file.name);
+}
+
 
     // console.log("File uploaded:", file.name);
   };
