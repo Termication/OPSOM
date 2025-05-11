@@ -7,16 +7,14 @@ import CTASection from "@/components/home/cta-section";
 
 export default function Home() {
   return (
-      <div className="relative w-full">
-        <BgGradient />
-        <div className="flex flex-col">
-          <HeroSection />
-          <DemoSection />
-          <Demo />
-          <PricingSection />
-          <CTASection />
-
-        </div>
+    <BgGradient>
+      <div className="relative w-full flex flex-col">
+        <HeroSection />
+        <DemoSection />
+        <Demo />
+        <PricingSection />
+        <CTASection />
       </div>
+    </BgGradient>
   );
 }
