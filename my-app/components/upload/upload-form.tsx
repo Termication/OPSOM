@@ -26,7 +26,14 @@ export default function UploadHeader() {
       return;
     }
 
-    console.log("File uploaded:", file.name);
+    const validatedFields = schema.safeParse({ file });
+    if (!validatedFields.success) {
+      console.log(validatedFields.error.flatten().
+      fieldErrors.file?.[0]) ?? "Invalid file.";
+      return;
+    }
+
+    // console.log("File uploaded:", file.name);
   };
 
   return (
