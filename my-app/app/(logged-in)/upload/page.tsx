@@ -21,6 +21,7 @@ export default function Page() {
           Upload your file and let us summarize it instantly.
         </p>
 
+        <span>Upload here</span>
         <div className="flex flex-col sm:flex-row justify-center gap-4 mt-4">
           <input
             type="file"
@@ -39,7 +40,7 @@ export default function Page() {
                        hover:from-emerald-600 hover:to-teal-600
                        transition shadow-md"
           >
-            Upload Now
+            Upload
           </button>
         </div>
       </div>
