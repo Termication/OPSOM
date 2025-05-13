@@ -57,8 +57,10 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   // console.log("File uploaded:", file.name);
 
 
-  const resp = await startUpload({ file });
-
+  const resp = await startUpload([ file ]);
+  if (!resp) {
+    return;
+  }
     // console.log("File uploaded:", file.name);
   };
 
