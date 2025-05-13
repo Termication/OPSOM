@@ -31,6 +31,8 @@ export default function UploadForm() {
       console.log("Upload started!", file);
     },
   })
+
+  
 }
 
 
@@ -56,11 +58,6 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     if (validatedFields.success) {
   // console.log("File uploaded:", file.name);
 
-
-  const resp = await startUpload([ file ]);
-  if (!resp) {
-    return;
-  }
     // console.log("File uploaded:", file.name);
   };
 
