@@ -1,5 +1,6 @@
 'use client';
 
+import { on } from "events";
 import UploadFormInput from "./upload-form-input";
 import { z } from "zod";
 
@@ -13,6 +14,22 @@ const schema = z.object({
             message: "File size must be less than 20MB.",
         }),
 });
+
+
+const default function UploadForm() {
+  const { startUpload, routeConfig } = useUploadThing
+  ('myUploadthingEndpoint', {
+    onClientUploadComplete: () => {
+      alert("Upload Completed!");
+    },
+    onUploadError: () => {
+      alert('Upload failed!');
+    },
+    onLoadbegin: ({ file }) => {
+      console.log("Upload started!", file);
+    },
+  })
+}
 
 
 export default function UploadHeader() {
@@ -36,7 +53,7 @@ export default function UploadHeader() {
     };
 
     if (validatedFields.success) {
-  console.log("File uploaded:", file.name);
+  // console.log("File uploaded:", file.name);
 }
 
 
