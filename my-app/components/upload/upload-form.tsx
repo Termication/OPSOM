@@ -3,6 +3,7 @@
 import { on } from "events";
 import UploadFormInput from "./upload-form-input";
 import { z } from "zod";
+import { useUploadThing } from '@/utils/uploadthing';
 
 const schema = z.object({
     file: z
