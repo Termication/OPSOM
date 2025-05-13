@@ -4,6 +4,7 @@ import { on } from "events";
 import UploadFormInput from "./upload-form-input";
 import { z } from "zod";
 import { useUploadThing } from '@/utils/uploadthing';
+import { error } from "console";
 
 const schema = z.object({
     file: z
@@ -17,14 +18,14 @@ const schema = z.object({
 });
 
 
-const default function UploadForm() {
+export default function UploadForm() {
   const { startUpload, routeConfig } = useUploadThing
-  ('myUploadthingEndpoint', {
+  ('pdfUploader', {
     onClientUploadComplete: () => {
-      alert("Upload Completed!");
+      console.log("Upload Completed!");
     },
     onUploadError: () => {
-      alert('Upload failed!');
+      console.error('Upload failed!', error);
     },
     onLoadbegin: ({ file }) => {
       console.log("Upload started!", file);
@@ -33,8 +34,7 @@ const default function UploadForm() {
 }
 
 
-export default function UploadHeader() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const file = formData.get("file") as File;
@@ -55,8 +55,9 @@ export default function UploadHeader() {
 
     if (validatedFields.success) {
   // console.log("File uploaded:", file.name);
-}
 
+
+  const resp = await startUpload({ file });
 
     // console.log("File uploaded:", file.name);
   };
