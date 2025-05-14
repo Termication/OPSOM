@@ -27,8 +27,8 @@ export default function UploadForm() {
     onUploadError: () => {
       console.error('Upload failed!', error);
     },
-    onUploadBegin: ({ fileName }) => {
-      console.log("Upload started!", fileName);
+    onUploadBegin:  (file) => {
+      console.log("Upload started!", file);
     },
   })
 
@@ -59,6 +59,12 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   // console.log("File uploaded:", file.name);
 
     // console.log("File uploaded:", file.name);
+
+    
+    // const res = await startUpload([file]);
+    // if (!res) {
+    //   console.error("Upload failed unexpectedly.");
+    // }
   };
 
   return (
