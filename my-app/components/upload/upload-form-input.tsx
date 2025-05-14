@@ -1,7 +1,5 @@
 'use client';
 
-import { Input } from "@/components/ui/input";
-
 interface UploadFormInputProps {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
