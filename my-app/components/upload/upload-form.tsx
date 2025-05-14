@@ -24,8 +24,9 @@ export default function UploadForm() {
     onClientUploadComplete: () => {
       console.log("Upload Completed!");
     },
-    onUploadError: () => {
-      console.error('Upload failed!', error);
+
+    onUploadError: (error) => {
+    console.error("Upload failed!", error);
     },
     onUploadBegin:  (file) => {
       console.log("Upload started!", file);
@@ -68,8 +69,6 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   };
 
   return (
-    <section>
-      <UploadFormInput onSubmit={handleSubmit} />
-    </section>
+     <UploadFormInput onSubmit={handleSubmit} />
   );
 }
