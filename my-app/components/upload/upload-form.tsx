@@ -62,10 +62,10 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     // console.log("File uploaded:", file.name);
 
     
-    // const res = await startUpload([file]);
-    // if (!res) {
-    //   console.error("Upload failed unexpectedly.");
-    // }
+    const res = await startUpload([file]);
+    if (!res) {
+      console.error("Upload failed unexpectedly.");
+    }
   };
 
   return (
