@@ -17,9 +17,7 @@ export default function UploadHeader() {
           <p className="text-gray-600 dark:text-gray-300 text-base md:text-lg">
             Upload your file and let us summarize it instantly.
           </p>
-
-        < UploadFormInput />
-
+          
         </section>
     )
 }
