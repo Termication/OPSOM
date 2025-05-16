@@ -3,6 +3,7 @@
 import UploadFormInput from "./upload-form-input";
 import { z } from "zod";
 import { useUploadThing } from '@/utils/uploadthing';
+import { toast } from 'sonner';
 
 const schema = z.object({
   file: z
@@ -18,13 +19,13 @@ const schema = z.object({
 export default function UploadForm() {
   const { startUpload } = useUploadThing('pdfUploader', {
     onClientUploadComplete: () => {
-      console.log("✅ Upload Completed!");
+      toast.success("✅ Upload Completed!");
     },
     onUploadError: (error) => {
-      console.error("❌ Upload failed!", error);
+      toast.error("❌ Upload failed!");
     },
     onUploadBegin: (fileName) => {
-      console.log("⏳ Upload started:", fileName);
+      toast.loading("⏳ Uploading file...",);
     },
   });
 
