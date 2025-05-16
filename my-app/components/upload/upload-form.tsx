@@ -1,43 +1,34 @@
 'use client';
 
-import { on } from "events";
 import UploadFormInput from "./upload-form-input";
 import { z } from "zod";
 import { useUploadThing } from '@/utils/uploadthing';
-import { error } from "console";
 
 const schema = z.object({
-    file: z
-        .instanceof(File, { message: "Invalid file." })
-        .refine((file) => file.type === "application/pdf", {
-            message: "Only PDF files are allowed.",
-        })
-        .refine((file) => file.size <= 20 * 1024 * 1024, {
-            message: "File size must be less than 20MB.",
-        }),
+  file: z
+    .instanceof(File, { message: "Invalid file." })
+    .refine((file) => file.type === "application/pdf", {
+      message: "Only PDF files are allowed.",
+    })
+    .refine((file) => file.size <= 20 * 1024 * 1024, {
+      message: "File size must be less than 20MB.",
+    }),
 });
 
-
 export default function UploadForm() {
-  const { startUpload, routeConfig } = useUploadThing
-  ('pdfUploader', {
+  const { startUpload } = useUploadThing('pdfUploader', {
     onClientUploadComplete: () => {
-      console.log("Upload Completed!");
+      console.log("✅ Upload Completed!");
     },
-
     onUploadError: (error) => {
-    console.error("Upload failed!", error);
+      console.error("❌ Upload failed!", error);
     },
-    onUploadBegin:  (file) => {
-      console.log("Upload started!", file);
+    onUploadBegin: (fileName) => {
+      console.log("⏳ Upload started:", fileName);
     },
-  })
+  });
 
-  
-}
-
-
-const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const file = formData.get("file") as File;
@@ -49,26 +40,22 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
     const validatedFields = schema.safeParse({ file });
 
-    console.log(validatedFields);
-
     if (!validatedFields.success) {
-        console.log(validatedFields.error.flatten().fieldErrors.file?.[0] ?? "Invalid file.");
+      const message = validatedFields.error.flatten().fieldErrors.file?.[0] ?? "Invalid file.";
+      console.error("Validation failed:", message);
+      alert(message);
+      return;
+    }
 
-    };
-
-    if (validatedFields.success) {
-  // console.log("File uploaded:", file.name);
-
-    // console.log("File uploaded:", file.name);
-
-    
-    // const res = await startUpload([file]);
-    // if (!res) {
-    //   console.error("Upload failed unexpectedly.");
-    // }
+    const res = await startUpload([file]);
+    if (!res) {
+      console.error("Upload failed unexpectedly.");
+    }
   };
 
   return (
-     <UploadFormInput onSubmit={handleSubmit} />
+    <section>
+      <UploadFormInput onSubmit={handleSubmit} />
+    </section>
   );
 }
