@@ -35,13 +35,14 @@ export default function RootLayout({
         <Toaster position="top-right" 
         richColors
         expand={true}
+        style={{ marginTop: "4rem" }}
         />
 
         <div className="relative flex min-h-screen flex-col">
           <Header />
 
           <main className="flex-1">{children}</main>
-          
+
           <Footer />
         </div>
       </body>

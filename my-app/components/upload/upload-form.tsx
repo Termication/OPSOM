@@ -29,7 +29,15 @@ export default function UploadForm() {
         description: "Your file has been uploaded successfully.",
         duration: 5000,
       });
+      setTimeout(() => {
+        toast.loading("Processing your PDF...", {
+          description: "Please wait while we summarize your document.",
+          duration: 5000,
+        });
+      }, 1000);
     },
+    
+
     onUploadError: (error) => {
       toast.dismiss(toastId); // ❌ stop loading
       toast.error("Upload failed!", {
