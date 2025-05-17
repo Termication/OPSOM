@@ -37,8 +37,6 @@ export default function UploadForm() {
       });
     },
   });
-}
-
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
