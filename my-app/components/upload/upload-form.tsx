@@ -70,9 +70,11 @@ export default function UploadForm() {
     if (!res) {
       console.error("Upload failed unexpectedly.");
     }
+
+
+    const summary = await generatePdfSummary(res);
   };
 
-  const summary = await generatePdfSummary(res);
 
   return (
     <section>
