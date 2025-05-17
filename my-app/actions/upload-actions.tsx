@@ -1,5 +1,7 @@
 'use server'
 
+import { extractTextFromPdf } from "@/lib/langchain";
+
 export async function generatePdfSummary(uploadRespose: [{
     serverData: {
         userId: string;
@@ -32,6 +34,7 @@ export async function generatePdfSummary(uploadRespose: [{
 
      try {
         const pdfText = await extractTextFromPdf(pdfUrl);
+        console.log("Extracted text from PDF:", pdfText);
      } catch (err) {
         return {
             success: false,
