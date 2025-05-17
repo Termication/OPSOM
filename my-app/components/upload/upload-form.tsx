@@ -17,24 +17,28 @@ const schema = z.object({
 });
 
 export default function UploadForm() {
+  let toastId: string | number | undefined;
+
   const { startUpload } = useUploadThing('pdfUploader', {
+    onUploadBegin: (fileName) => {
+      toastId = toast.loading("Uploading file...");
+    },
     onClientUploadComplete: () => {
+      toast.dismiss(toastId); // ❌ stop loading
       toast.success("Upload Completed!", {
         description: "Your file has been uploaded successfully.",
         duration: 5000,
       });
     },
     onUploadError: (error) => {
-      toast.error("Upload failed!",
-        {
-          description: "Please try again. Ensure the file is a valid PDF and under 20MB.",
-        }
-      );
-    },
-    onUploadBegin: (fileName) => {
-      toast.loading("Uploading file...",);
+      toast.dismiss(toastId); // ❌ stop loading
+      toast.error("Upload failed!", {
+        description: "Please try again. Ensure the file is a valid PDF and under 20MB.",
+      });
     },
   });
+}
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
