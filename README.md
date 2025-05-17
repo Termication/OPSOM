@@ -10,10 +10,16 @@ This is a simple Next.js-based PDF uploader that allows users to upload `.pdf` f
 - Upload progress and completion logs
 - Built with:
   - Next.js (App Router)
+  - Log & Sign Up (Clerk)
   - TypeScript
   - Tailwind CSS
+      - shadcn ui
+
   - UploadThing
   - Zod for validation
+  - Langchain
+
+
 
 ## 🚀 Getting Started
 
