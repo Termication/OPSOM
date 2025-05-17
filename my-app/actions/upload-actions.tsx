@@ -1,47 +1,44 @@
 'use server'
 
 import { extractTextFromPdf } from "@/lib/langchain";
+import type { ClientUploadedFileData } from "uploadthing/types";
 
-export async function generatePdfSummary(uploadRespose: [{
-    serverData: {
-        userId: string;
-        file: {
-            url: string;
-            name: string;
-        };
+export async function generatePdfSummary(uploadResponse: ClientUploadedFileData<{
+  userId: string;
+  fileUrl: string;
+  fileName: string;
+}>[]) {
+  if (!uploadResponse || uploadResponse.length === 0) {
+    return {
+      success: false,
+      message: "No upload response provided.",
+      data: null,
     };
-}]) {
-    if (!uploadRespose) {
-        return {
-            success: false,
-            message: "No upload response provided.",
-            data: null,
-        };
-    }
+  }
 
-    const {
-    serverData: {
-        userId,
-        file: { url: pdfUrl, name: fileName },
-    },
-    } = uploadRespose[0];
+  const { serverData: { userId, fileUrl, fileName } } = uploadResponse[0];
 
-     if(!pdfUrl){
-        return {
-            success: false,
-            message: "No PDF URL provided.",
-            data: null,
-        };
-     }
+  if (!fileUrl) {
+    return {
+      success: false,
+      message: "No PDF URL provided.",
+      data: null,
+    };
+  }
 
-     try {
-        const pdfText = await extractTextFromPdf(pdfUrl);
-        console.log("Extracted text from PDF:", pdfText);
-     } catch (err) {
-        return {
-            success: false,
-            message: "Error extracting text from PDF.",
-            data: null,
-        }
-    }
+  try {
+    const pdfText = await extractTextFromPdf(fileUrl);
+    console.log("Extracted text from PDF:", pdfText);
+    return {
+      success: true,
+      message: "Text extracted.",
+      data: pdfText,
+    };
+  } catch (err) {
+    return {
+      success: false,
+      message: "Error extracting text from PDF.",
+      data: null,
+    };
+  }
 }

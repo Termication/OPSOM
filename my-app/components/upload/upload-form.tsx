@@ -68,7 +68,10 @@ export default function UploadForm() {
 
     const res = await startUpload([file]);
     if (!res) {
-      console.error("Upload failed unexpectedly.");
+      toast("Upload failed unexpectedly.",{
+        duration: 5000,
+    });
+      return;
     }
 
 
