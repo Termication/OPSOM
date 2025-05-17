@@ -19,10 +19,12 @@ export async function generatePdfSummary(uploadRespose: [{
         };
     }
 
-    const { serverData: 
+    const {
+    serverData: {
         userId,
         file: { url: pdfUrl, name: fileName },
-     } = uploadRespose[0];
+    },
+    } = uploadRespose[0];
 
      if(!pdfUrl){
         return {
