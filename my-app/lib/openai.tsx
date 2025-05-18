@@ -20,7 +20,7 @@ export async function generateFromOpenAI(pdfText: string) {
         },
         {
             role: "user",
-            content: "",
+            content: "Transform the following text into a summary. it should be easy to read, catchy with contextually relevent emojis and proper markdown " + pdfText,
         },
     ],
     temperature: 0.7,
