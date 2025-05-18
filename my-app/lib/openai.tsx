@@ -6,7 +6,10 @@ const client = new OpenAI(
 }
 );
 
-const completion = await client.chat.completions.create({
+
+export async function generateFromOpenAI(pdfText: string) {
+  try {  
+    const completion = await client.chat.completions.create({
     model: "gpt-4.1",
     messages: [
         {
@@ -18,4 +21,13 @@ const completion = await client.chat.completions.create({
     max_tokens: 1500,
 });
 
-console.log(completion.choices[0].message.content);
+return completion.choices[0].message.content;
+  }
+    catch (error: any) {
+        if (error?.status === 429) {
+            throw new Error('RATE_LIMIT_EXCEEDED');
+        }
+        throw error;
+    }
+    
+}
