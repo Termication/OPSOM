@@ -1,5 +1,8 @@
 import { ApiError } from "next/dist/server/api-utils";
 import OpenAI from "openai";
+import { SUMMARY_SYSTEM_PROMPT } from "@/utils/prompts";
+
+
 const client = new OpenAI(
 {
         apiKey: process.env.OPENAI_API_KEY,
@@ -13,8 +16,11 @@ export async function generateFromOpenAI(pdfText: string) {
     model: "gpt-4.1",
     messages: [
         {
-            role: "system",
-            content: "",
+            role: "system", content: SUMMARY_SYSTEM_PROMPT
+        },
+        {
+            role: "user",
+            content: "Transform the following text into a summary. it should be easy to read, catchy with contextually relevent emojis and proper markdown " + pdfText,
         },
     ],
     temperature: 0.7,
