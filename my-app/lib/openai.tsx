@@ -1,5 +1,8 @@
 import { ApiError } from "next/dist/server/api-utils";
 import OpenAI from "openai";
+import { SUMMARY_SYSTEM_PROMPT } from "@/utils/prompts";
+
+
 const client = new OpenAI(
 {
         apiKey: process.env.OPENAI_API_KEY,
@@ -13,7 +16,10 @@ export async function generateFromOpenAI(pdfText: string) {
     model: "gpt-4.1",
     messages: [
         {
-            role: "system",
+            role: "system", content: SUMMARY_SYSTEM_PROMPT
+        },
+        {
+            role: "user",
             content: "",
         },
     ],
