@@ -11,32 +11,36 @@ const client = new OpenAI(
 
 
 export async function generateFromOpenAI(pdfText: string) {
-  try {  
+  try {
     const completion = await client.chat.completions.create({
-    model: "gpt-4.1",
-    messages: [
+      model: "gpt-3.5-turbo-1106", 
+      messages: [
         {
-            role: "system", content: SUMMARY_SYSTEM_PROMPT
+          role: "system",
+          content: SUMMARY_SYSTEM_PROMPT,
         },
         {
-            role: "user",
-            content: "Transform the following text into a summary. it should be easy to read, catchy with contextually relevent emojis and proper markdown " + pdfText,
+          role: "user",
+          content: `Transform the following text into a summary. Make it readable, catchy, with contextually relevant emojis and markdown:\n\n${pdfText.slice(0, 6000)}`,
         },
-    ],
-    temperature: 0.7,
-    max_tokens: 1500,
-});
+      ],
+      temperature: 0.7,
+      max_tokens: 1500,
+    });
 
-return completion.choices[0].message.content;
+    return completion.choices[0].message.content;
+  } catch (error: any) {
+    console.error("OpenAI error details:", {
+      status: error?.status,
+      message: error?.message,
+      type: error?.type,
+      detail: error?.detail,
+    });
 
-  }
-    catch (error: any) {
-        if (error?.status === 429) {
-            console.warn("Hit rate limit. Please wait and try again.");
-            throw new Error('RATE_LIMIT_EXCEEDED');
-        }
-        console.error("OpenAI API error:", error);
-        throw error;
+    if (error?.status === 429) {
+      return "⚠️ OpenAI rate limit exceeded. Please try again soon.";
     }
-    
+
+    return "❌ An unexpected error occurred.";
+  }
 }
