@@ -28,11 +28,14 @@ export async function generateFromOpenAI(pdfText: string) {
 });
 
 return completion.choices[0].message.content;
+
   }
     catch (error: any) {
         if (error?.status === 429) {
+            console.warn("Hit rate limit. Please wait and try again.");
             throw new Error('RATE_LIMIT_EXCEEDED');
         }
+        console.error("OpenAI API error:", error);
         throw error;
     }
     

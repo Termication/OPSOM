@@ -29,23 +29,13 @@ export async function generatePdfSummary(uploadResponse: ClientUploadedFileData<
 
   try {
     const pdfText = await extractTextFromPdf(fileUrl);
-    // console.log("Extracted text from PDF:", pdfText);
-    return {
-      success: true,
-      message: "Text extracted.",
-      data: pdfText,
-    };
 
     let summary;
-
     try {
       summary = await generateFromOpenAI(pdfText);
-      console.log({ summary });    
+      console.log({ summary }); 
     } catch (error) {
-      console.error(error);
-    }
-    
-    if (!summary){
+      console.error("OpenAI error:", error);
       return {
         success: false,
         message: "Error generating summary.",
@@ -53,7 +43,14 @@ export async function generatePdfSummary(uploadResponse: ClientUploadedFileData<
       };
     }
 
-}  catch (err) {
+    return {
+      success: true,
+      message: "Summary generated.",
+      data: summary,
+    };
+
+  } catch (err) {
+    console.error("PDF extraction error:", err);
     return {
       success: false,
       message: "Error extracting text from PDF.",
