@@ -76,6 +76,9 @@ export default function UploadForm() {
     }
 
     const summary = await generatePdfSummary(res);
+
+    console.log("Summary response:", summary);
+
     const { data = null, message = null } = summary || {};
     if (!data) {
       toast.error("Error generating summary.", { description: message });
