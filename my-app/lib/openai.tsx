@@ -1,19 +1,14 @@
-import { ApiError } from "next/dist/server/api-utils";
 import OpenAI from "openai";
 import { SUMMARY_SYSTEM_PROMPT } from "@/utils/prompts";
 
-
-const client = new OpenAI(
-{
-        apiKey: process.env.OPENAI_API_KEY,
-}
-);
-
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY!,
+});
 
 export async function generateFromOpenAI(pdfText: string) {
   try {
     const completion = await client.chat.completions.create({
-      model: "gpt-3.5-turbo-1106", 
+      model: "gpt-3.5-turbo-1106",
       messages: [
         {
           role: "system",
@@ -38,9 +33,11 @@ export async function generateFromOpenAI(pdfText: string) {
     });
 
     if (error?.status === 429) {
-      return "⚠️ OpenAI rate limit exceeded. Please try again soon.";
+      // ❗ throw instead of returning a message
+      throw new Error("Rate limit reached");
     }
 
-    return "❌ An unexpected error occurred.";
+    // ❗ also throw for other unexpected errors
+    throw new Error("Unexpected OpenAI error");
   }
 }
