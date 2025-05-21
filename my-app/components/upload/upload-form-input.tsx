@@ -1,5 +1,7 @@
 'use client';
 
+import { Loader2 } from 'lucide-react';
+
 interface UploadFormInputProps {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   isSubmitting: boolean;
@@ -32,12 +34,12 @@ export default function UploadFormInput({ onSubmit, isSubmitting, formRef }: Upl
         <button
           type="submit"
           disabled={isSubmitting}
-          className="px-6 py-2 rounded-md font-semibold text-white
+          className="inline-flex items-center justify-center  px-6 py-2 rounded-md font-semibold text-white
                      bg-gradient-to-r from-emerald-500 to-teal-500
                      hover:from-emerald-600 hover:to-teal-600
                      transition shadow-md"
         >
-          {isSubmitting ? 'Uploading...' : 'Upload'}
+          {isSubmitting ? <><Loader2 className='mr-2 h-4 w-4 animate-spin' />Processing</> : 'Upload'}
         </button>
       </div>
     </form>
