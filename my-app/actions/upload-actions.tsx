@@ -3,6 +3,7 @@
 import { extractTextFromPdf } from "@/lib/langchain";
 import type { ClientUploadedFileData } from "uploadthing/types";
 import { generateFromOpenAI } from "@/lib/openai";
+import { generateSummaryFromGemini } from "@/lib/geminiai";
 
 export async function generatePdfSummary(uploadResponse: ClientUploadedFileData<{
   userId: string;
