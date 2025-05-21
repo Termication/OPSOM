@@ -3,6 +3,7 @@
 import { extractTextFromPdf } from "@/lib/langchain";
 import type { ClientUploadedFileData } from "uploadthing/types";
 import { generateFromOpenAI } from "@/lib/openai";
+import { generateSummaryFromGemini } from "@/lib/geminiai";
 
 export async function generatePdfSummary(uploadResponse: ClientUploadedFileData<{
   userId: string;
@@ -36,6 +37,19 @@ export async function generatePdfSummary(uploadResponse: ClientUploadedFileData<
       console.log({ summary }); 
     } catch (error) {
       console.error("OpenAI error:", error);
+
+      if (error instanceof Error && error.message.includes("exceeded")) {
+        try{
+          summary = await generateSummaryFromGemini(pdfText);
+
+        } catch (geminiError) {
+          console.error("Gemini error:", geminiError);
+        };
+
+        throw new Error ('failed to generate summary');
+      
+      }
+
       return {
         success: false,
         message: "Error generating summary.",
