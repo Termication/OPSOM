@@ -5,7 +5,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 export async function generateSummaryFromGemini(pdfText: string) {
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" }); // Latest stable
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" }); // Latest stable
 
     const prompt = `${SUMMARY_SYSTEM_PROMPT}\n\nTransform the following text into a summary. Make it readable, catchy, with contextually relevant emojis and markdown:\n\n${pdfText.slice(0, 6000)}`;
 
