@@ -4,7 +4,7 @@ import { extractTextFromPdf } from "@/lib/langchain";
 import type { ClientUploadedFileData } from "uploadthing/types";
 import { generateFromOpenAI } from "@/lib/openai";
 import { generateSummaryFromDeekseek } from "@/lib/deepseek";
-
+import { auth } from "@clerk/nextjs/server";
 export async function generatePdfSummary(uploadResponse: ClientUploadedFileData<{
   userId: string;
   fileUrl: string;
@@ -72,3 +72,39 @@ export async function generatePdfSummary(uploadResponse: ClientUploadedFileData<
   }
 }
 
+
+async function savePdfSummary() {
+  try{
+    const sql = await getData();
+
+  } catch (error: any) {
+    console.error("Error storing PDF summary:", error);
+    return {
+      success: false,
+      message: "Error storing PDF summary.",
+    };
+  }
+}
+
+
+export async storePdfSummary() {
+  
+  let savePdfSummary;
+
+  try{
+     const { userId } = auth();
+      if (!userId) {
+        return {
+          success: false,
+          message: "User not authenticated.",
+        };
+      }
+
+  } catch (error: any) {
+    console.error("Error storing PDF summary:", error);
+    return {
+      success: false,
+      message: "Error storing PDF summary.",
+    };
+  }
+}
