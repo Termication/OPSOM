@@ -3,7 +3,7 @@
 import { extractTextFromPdf } from "@/lib/langchain";
 import type { ClientUploadedFileData } from "uploadthing/types";
 import { generateFromOpenAI } from "@/lib/openai";
-import { generateSummaryFromDeekseek } from "@/lib/deepseek"; // ✅ now points to DeepSeek
+import { generateSummaryFromDeekseek } from "@/lib/deepseek";
 
 export async function generatePdfSummary(uploadResponse: ClientUploadedFileData<{
   userId: string;
