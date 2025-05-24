@@ -90,12 +90,12 @@ async function savePdfSummary() {
 }
 
 
-export async storePdfSummary() {
+export async function storePdfSummary() {
   
   let savePdfSummary;
 
   try{
-     const { userId } = auth();
+     const { userId } = await auth();
       if (!userId) {
         return {
           success: false,
