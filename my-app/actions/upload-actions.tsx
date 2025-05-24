@@ -5,6 +5,9 @@ import type { ClientUploadedFileData } from "uploadthing/types";
 import { generateFromOpenAI } from "@/lib/openai";
 import { generateSummaryFromDeekseek } from "@/lib/deepseek";
 import { auth } from "@clerk/nextjs/server";
+import { getData } from "@/lib/db";
+
+
 export async function generatePdfSummary(uploadResponse: ClientUploadedFileData<{
   userId: string;
   fileUrl: string;
