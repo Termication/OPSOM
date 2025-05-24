@@ -5,6 +5,9 @@ import type { ClientUploadedFileData } from "uploadthing/types";
 import { generateFromOpenAI } from "@/lib/openai";
 import { generateSummaryFromDeekseek } from "@/lib/deepseek";
 import { auth } from "@clerk/nextjs/server";
+import { getData } from "@/lib/db";
+
+
 export async function generatePdfSummary(uploadResponse: ClientUploadedFileData<{
   userId: string;
   fileUrl: string;
@@ -72,10 +75,29 @@ export async function generatePdfSummary(uploadResponse: ClientUploadedFileData<
   }
 }
 
+// Define types for your function parameters
+interface PdfSummaryData {
+  userId: string;
+  filename: string;
+  fileUrl: string;
+  summary: string;
+}
 
-async function savePdfSummary() {
+async function savePdfSummary({ userId, filename, fileUrl, summary }: {
+  userId: string;
+  filename: string;
+  fileUrl: string;
+  summary: string;
+}) {
   try{
     const sql = await getData();
+    await sql`INSERT INTO pdf_summaries (user_id, file_name, file_url, summary)
+VALUES (
+      ${userId}, 
+      ${filename}, 
+      ${fileUrl}, 
+      ${summary}
+);`
 
   } catch (error: any) {
     console.error("Error storing PDF summary:", error);
@@ -87,18 +109,42 @@ async function savePdfSummary() {
 }
 
 
-export async storePdfSummary() {
+export async function storePdfSummary({ 
+        userId,
+        filename,
+        fileUrl,
+        summary,
+      }: PdfSummaryData) {
   
-  let savePdfSummary;
+  let savedSummary;
 
   try{
-     const { userId } = auth();
+     const { userId } = await auth();
       if (!userId) {
         return {
           success: false,
           message: "User not authenticated.",
         };
       }
+      savedSummary = await savePdfSummary({ 
+        userId,
+        filename,
+        fileUrl,
+        summary,
+      });
+
+      if (savedSummary) {
+        return {
+          success: true,
+          message: "PDF summary stored successfully.",
+        };
+      } else {
+        return {
+          success: false,
+          message: "Failed to store PDF summary.",
+        };
+      }
+
 
   } catch (error: any) {
     console.error("Error storing PDF summary:", error);
