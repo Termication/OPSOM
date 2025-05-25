@@ -13,7 +13,7 @@ CREATE TABLE users (
 -- PDF SUMMARIES table
 CREATE TABLE pdf_summaries (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  user_id TEXT REFERENCES users(id) ON DELETE CASCADE,
   file_name TEXT NOT NULL,
   file_url TEXT NOT NULL,
   summary TEXT,
@@ -24,7 +24,7 @@ CREATE TABLE pdf_summaries (
 -- PAYMENTS table
 CREATE TABLE payments (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  user_id TEXT REFERENCES users(id) ON DELETE CASCADE,
   amount NUMERIC(10, 2) NOT NULL,
   currency TEXT DEFAULT 'ZAR',
   status TEXT CHECK (status IN ('pending', 'completed', 'failed')) NOT NULL,
