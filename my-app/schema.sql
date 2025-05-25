@@ -1,57 +1,64 @@
--- Enable UUID generator
+-- Enable UUID extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
--- USERS table
+-- Users table
 CREATE TABLE users (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  email TEXT UNIQUE NOT NULL,
-  name TEXT,
-  created_at TIMESTAMPTZ DEFAULT now(),
-  updated_at TIMESTAMPTZ DEFAULT now()
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    email VARCHAR(255) UNIQUE NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    full_name VARCHAR(255),
+    customer_id VARCHAR(255) UNIQUE,
+    price_id VARCHAR(255),
+    status VARCHAR(50) DEFAULT 'inactive'
 );
 
--- PDF SUMMARIES table
+-- PDF Summaries table (for storing PDF processing results)
 CREATE TABLE pdf_summaries (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id TEXT REFERENCES users(id) ON DELETE CASCADE,
-  file_name TEXT NOT NULL,
-  file_url TEXT NOT NULL,
-  summary TEXT,
-  created_at TIMESTAMPTZ DEFAULT now(),
-  updated_at TIMESTAMPTZ DEFAULT now()
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id VARCHAR(255) NOT NULL,
+    original_file_url TEXT NOT NULL,
+    summary_text TEXT NOT NULL,
+    status VARCHAR(50) DEFAULT 'completed',
+    title TEXT,
+    file_name TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- PAYMENTS table
+
+-- Payments table
 CREATE TABLE payments (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id TEXT REFERENCES users(id) ON DELETE CASCADE,
-  amount NUMERIC(10, 2) NOT NULL,
-  currency TEXT DEFAULT 'ZAR',
-  status TEXT CHECK (status IN ('pending', 'completed', 'failed')) NOT NULL,
-  payment_provider TEXT,
-  transaction_id TEXT UNIQUE,
-  created_at TIMESTAMPTZ DEFAULT now(),
-  updated_at TIMESTAMPTZ DEFAULT now()
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    amount INTEGER NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    stripe_payment_id VARCHAR(255) UNIQUE NOT NULL,
+    price_id VARCHAR(255) NOT NULL,
+    user_email VARCHAR(255) NOT NULL REFERENCES users (email),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- Trigger function to update `updated_at`
+-- Create updated_at trigger function
 CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$
 BEGIN
-  NEW.updated_at = now();
-  RETURN NEW;
+    NEW.updated_at = CURRENT_TIMESTAMP;
+    RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
-
--- Triggers
-CREATE TRIGGER update_user_updated_at
+$$ language 'plpgsql';
+-- Add triggers to update updated_at
+CREATE TRIGGER update_users_updated_at
 BEFORE UPDATE ON users
-FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+FOR EACH ROW
+EXECUTE FUNCTION update_updated_at_column();
 
-CREATE TRIGGER update_pdf_summary_updated_at
+CREATE TRIGGER update_pdf_summaries_updated_at
 BEFORE UPDATE ON pdf_summaries
-FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+FOR EACH ROW
+EXECUTE FUNCTION update_updated_at_column();
 
-CREATE TRIGGER update_payment_updated_at
+CREATE TRIGGER update_payments_updated_at
 BEFORE UPDATE ON payments
-FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+FOR EACH ROW
+EXECUTE FUNCTION update_updated_at_column();

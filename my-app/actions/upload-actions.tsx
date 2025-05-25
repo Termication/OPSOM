@@ -95,11 +95,16 @@ async function savePdfSummary({ userId, filename, fileUrl, summary }: {
 
   // Insert the PDF summary
     await sql`
-      INSERT INTO pdf_summaries (user_id, file_name, file_url, summary)
+      INSERT INTO pdf_summaries (
+        user_id,
+        file_name,
+        original_file_url,
+        summary_text
+      )
       VALUES (
-        ${userId}, 
-        ${filename}, 
-        ${fileUrl}, 
+        ${userId},
+        ${filename},
+        ${fileUrl},
         ${summary}
       );
     `;
