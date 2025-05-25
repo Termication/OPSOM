@@ -6,6 +6,7 @@ import { generateFromOpenAI } from "@/lib/openai";
 import { generateSummaryFromDeekseek } from "@/lib/deepseek";
 import { auth } from "@clerk/nextjs/server";
 import { getData } from "@/lib/db";
+import { revalidatePath } from "next/cache";
 
 
 export async function generatePdfSummary(uploadResponse: ClientUploadedFileData<{
@@ -143,18 +144,6 @@ export async function storePdfSummary({
         summary,
       });
 
-      if (savedSummary) {
-        return {
-          success: true,
-          message: "PDF summary stored successfully.",
-        };
-      } else {
-        return {
-          success: false,
-          message: "Failed to store PDF summary.",
-        };
-      }
-
 
   } catch (error: any) {
     console.error("Error storing PDF summary:", error);
@@ -163,4 +152,21 @@ export async function storePdfSummary({
       message: "Error storing PDF summary.",
     };
   }
+
+  // revalidate the cache 
+  revalidatePath();
+
+    if (savedSummary) {
+    return {
+      success: true,
+      message: "PDF summary stored successfully.",
+    };
+  } else {
+    
+    return {
+      success: false,
+      message: "Failed to store PDF summary.",
+    };
+  }
+
 }
