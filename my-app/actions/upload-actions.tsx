@@ -154,7 +154,7 @@ export async function storePdfSummary({
   }
 
   // revalidate the cache 
-  revalidatePath();
+  revalidatePath(`/summaries/${savedSummary.id}`);
 
     if (savedSummary) {
     return {

@@ -5,6 +5,7 @@ import { z } from "zod";
 import { useRef, useState } from "react";
 import { useUploadThing } from '@/utils/uploadthing';
 import { toast } from 'sonner';
+import { useRouter } from "next/navigation";
 import { generatePdfSummary, storePdfSummary } from "@/actions/upload-actions";
 
 const schema = z.object({
@@ -22,6 +23,7 @@ export default function UploadForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   let toastId: string | number | undefined;
+  const router = useRouter();
 
   const { startUpload } = useUploadThing('pdfUploader', {
     onUploadBegin: (fileName) => {
@@ -108,8 +110,8 @@ export default function UploadForm() {
       formRef.current?.reset();
 
       // redirect to the summary page
- 
-
+      router.push(`/summary/${storeResult.id}`);
+      
 
     }
 
