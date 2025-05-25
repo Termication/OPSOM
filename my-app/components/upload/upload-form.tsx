@@ -30,7 +30,6 @@ export default function UploadForm() {
     onClientUploadComplete: () => {
       toast.dismiss(toastId);
       toast.success("Upload Completed!", {
-        description: "Your file has been uploaded successfully.",
         duration: 5000,
       });
       setTimeout(() => {
@@ -107,6 +106,11 @@ export default function UploadForm() {
       }); 
 
       formRef.current?.reset();
+
+      // redirect to the summary page
+ 
+
+
     }
 
     setIsSubmitting(false);
