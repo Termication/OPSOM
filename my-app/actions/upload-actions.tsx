@@ -83,6 +83,7 @@ interface PdfSummaryData {
   summary: string;
 }
 
+
 async function savePdfSummary({ userId, filename, fileUrl, summary }: {
   userId: string;
   filename: string;
@@ -91,13 +92,17 @@ async function savePdfSummary({ userId, filename, fileUrl, summary }: {
 }) {
   try{
     const sql = await getData();
-    await sql`INSERT INTO pdf_summaries (user_id, file_name, file_url, summary)
-VALUES (
-      ${userId}, 
-      ${filename}, 
-      ${fileUrl}, 
-      ${summary}
-);`
+
+  // Insert the PDF summary
+    await sql`
+      INSERT INTO pdf_summaries (user_id, file_name, file_url, summary)
+      VALUES (
+        ${userId}, 
+        ${filename}, 
+        ${fileUrl}, 
+        ${summary}
+      );
+    `;
 
   } catch (error: any) {
     console.error("Error storing PDF summary:", error);
