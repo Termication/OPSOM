@@ -156,10 +156,13 @@ export async function storePdfSummary({
   // revalidate the cache 
   revalidatePath(`/summaries/${savedSummary.id}`);
 
-    if (savedSummary) {
+  if (savedSummary) {
     return {
       success: true,
       message: "PDF summary stored successfully.",
+      data: {
+        id: savedSummary.id,
+      }
     };
   } else {
     

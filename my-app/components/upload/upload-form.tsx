@@ -95,8 +95,10 @@ export default function UploadForm() {
       
     }
 
+    let storeResult: any;
+
     if (data.summary) {
-      await storePdfSummary({
+      storeResult = await storePdfSummary({
         filename : file.name,
         fileUrl : res[0].serverData.fileUrl,
         summary : data.summary,
@@ -110,8 +112,8 @@ export default function UploadForm() {
       formRef.current?.reset();
 
       // redirect to the summary page
-      router.push(`/summary/${storeResult.id}`);
-      
+      router.push(`/summary/${storeResult.data.id}`);
+
 
     }
 
