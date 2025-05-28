@@ -18,6 +18,7 @@ This is a simple Next.js-based PDF uploader that allows users to upload `.pdf` f
   - UploadThing
   - Zod for validation
   - Langchain
+  - Postgres NeonDB
 
 
 
