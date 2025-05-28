@@ -6,7 +6,7 @@ import { PlusCircle, FileText, FolderOpen } from "lucide-react";
 
 export default function DashboardPage() {
   return (
-    <section className="relative min-h-screen px-4 pt-20 bg-white dark:bg-gray-950">
+    <section className="relative min-h-screen px-4 pt-20 dark:bg-gray-950">
       <BgGradient />
 
       <div className="max-w-4xl mx-auto text-center space-y-6">
