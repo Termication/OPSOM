@@ -112,7 +112,7 @@ export default function UploadForm() {
       formRef.current?.reset();
 
       // redirect to the summary page
-      router.push(`/summary/${storeResult.data.id}`);
+      // router.push(`/summary/${storeResult.data.id}`);
 
 
     }

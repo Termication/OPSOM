@@ -161,7 +161,6 @@ export async function storePdfSummary({
       success: true,
       message: "PDF summary stored successfully.",
       data: {
-        id: savedSummary.id,
       }
     };
   } else {
