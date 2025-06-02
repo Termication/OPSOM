@@ -95,7 +95,7 @@ async function savePdfSummary({ userId, filename, fileUrl, summary }: {
     const sql = await getData();
 
   // Insert the PDF summary
-    await sql`
+    const [row] = await sql`
       INSERT INTO pdf_summaries (
         user_id,
         file_name,
@@ -107,8 +107,10 @@ async function savePdfSummary({ userId, filename, fileUrl, summary }: {
         ${filename},
         ${fileUrl},
         ${summary}
-      );
+      )
+        RETURNING id;
     `;
+    return row;
 
   } catch (error: any) {
     console.error("Error storing PDF summary:", error);
