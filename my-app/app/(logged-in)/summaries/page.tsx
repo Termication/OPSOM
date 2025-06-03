@@ -33,11 +33,12 @@ export default async function ViewSummariesPage() {
             <Link
               key={summary.id}
               href={`/summary/${summary.id}`}
-              className="transform transition duration-500 hover:scale-105"
+              className="group transform transition duration-500 hover:scale-[1.03] hover:no-underline hover:shadow-lg"
             >
-              <div className="bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 p-[1px] rounded-2xl shadow-lg">
-                <div className="bg-white dark:bg-black rounded-2xl p-6 h-full hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-300">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white truncate">
+              <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 via-pink-500 to-yellow-500 opacity-60 group-hover:opacity-80 transition-opacity duration-500 blur-sm"></div>
+                <div className="relative z-10 bg-white dark:bg-zinc-900 rounded-2xl p-6 h-full transition-colors duration-300 group-hover:ring-2 group-hover:ring-offset-2 group-hover:ring-indigo-500">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white truncate group-hover:underline">
                     {summary.file_name}
                   </h3>
                   <p className="text-sm text-gray-500 mt-2">
