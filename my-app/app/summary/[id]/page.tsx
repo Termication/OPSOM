@@ -19,7 +19,7 @@ export default async function SummaryDetailPage({ params }: { params: { id: stri
     <section className="min-h-screen px-4 pt-20 max-w-3xl mx-auto">
       {/* Navigation */}
       <div className="mb-6">
-        <Link href="/summaries" className="text-blue-600 hover:underline">
+        <Link href="/summaries" className="text-blue-600 hover:text-blue-800 transition-colors">
           ← Back to summaries
         </Link>
       </div>
