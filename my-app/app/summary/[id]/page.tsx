@@ -31,9 +31,9 @@ export default async function SummaryDetailPage({ params }: { params: { id: stri
       </p>
 
       {/* Render Markdown */}
-      <div className="prose prose-slate max-w-none bg-white p-6 rounded-xl shadow-lg">
-        <ReactMarkdown>{summary.summary_text}</ReactMarkdown>
-      </div>
+        <div className="prose prose-slate max-w-none bg-white p-6 rounded-xl shadow-lg leading-relaxed space-y-4">
+            <ReactMarkdown>{summary.summary_text}</ReactMarkdown>
+        </div>
     </section>
   );
 }
