@@ -8,6 +8,7 @@ export default async function SummaryDetailPage({ params }: { params: { id: stri
   const { userId } = await auth();
   if (!userId) return notFound();
 
+  // Fetch summary data from the database
   const sql = await getData();
   const [summary] = await sql`
     SELECT * FROM pdf_summaries WHERE id = ${params.id} AND user_id = ${userId};

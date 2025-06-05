@@ -10,6 +10,7 @@ export default function DashboardPage() {
         <p className="text-gray-600">Manage your uploads and view summaries.</p>
       </div>
 
+      // Animated Cards for Actions
       <div className="grid gap-6 mt-10 max-w-4xl mx-auto grid-cols-1 sm:grid-cols-2">
         <AnimatedCard
           title="Create New Summary"
