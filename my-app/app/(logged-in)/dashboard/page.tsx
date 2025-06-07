@@ -1,6 +1,7 @@
 import AnimatedCard from "@/components/common/animated-card";
 import BgGradient from "@/components/common/bg-gradient";
 
+// DashboardPage Component
 export default function DashboardPage() {
   return (
     <section className="relative min-h-screen px-4 pt-20">
