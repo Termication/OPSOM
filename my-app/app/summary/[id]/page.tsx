@@ -3,6 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
+import BgGradient from "@/components/common/bg-gradient";
 
 export default async function SummaryDetailPage({ params }: { params: { id: string } }) {
   const { userId } = await auth();
@@ -18,6 +19,8 @@ export default async function SummaryDetailPage({ params }: { params: { id: stri
 
   return (
     <section className="min-h-screen px-4 pt-20 max-w-3xl mx-auto">
+      <BgGradient />
+
       {/* Navigation */}
       <div className="mb-6">
         <Link href="/summaries" className="text-blue-600 hover:text-blue-800 transition-colors">
