@@ -1,9 +1,11 @@
 import { auth } from "@clerk/nextjs/server";
 import { getData } from "@/lib/db";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import BgGradient from "@/components/common/bg-gradient";
 import Link from "next/link";
 import { revalidatePath } from "next/cache";
+import { DotsHorizontalIcon } from "@radix-ui/react-icons";
+import { useState } from "react";
 
 export default async function ViewSummariesPage() {
   const { userId } = await auth();
@@ -17,7 +19,6 @@ export default async function ViewSummariesPage() {
     ORDER BY created_at DESC;
   `;
 
-
   async function handleDelete(id: string) {
     "use server";
     const sql = await getData();
@@ -25,8 +26,6 @@ export default async function ViewSummariesPage() {
     revalidatePath("/summaries");
   }
 
-
-  
   return (
     <section className="relative min-h-screen px-4 pt-20">
       <BgGradient />
@@ -56,20 +55,25 @@ export default async function ViewSummariesPage() {
                   </p>
                 </div>
               </Link>
-              <form
-                action={async () => {
-                  "use server";
-                  await handleDelete(summary.id);
-                }}
-                className="absolute top-2 right-2 z-20"
-              >
-                <button
-                  type="submit"
-                  className="text-sm text-red-600 bg-white dark:bg-zinc-900 bg-opacity-80 rounded px-2 py-1 shadow hover:bg-red-100 hover:text-red-800 transition"
+              <details className="absolute top-2 right-2 z-20">
+                <summary className="cursor-pointer text-gray-600 hover:text-gray-800 p-1 rounded-full bg-white dark:bg-zinc-800 shadow">
+                  <DotsHorizontalIcon className="h-5 w-5" />
+                </summary>
+                <form
+                  action={async () => {
+                    "use server";
+                    await handleDelete(summary.id);
+                  }}
+                  className="mt-2 bg-white dark:bg-zinc-800 shadow rounded px-3 py-2"
                 >
-                  Delete
-                </button>
-              </form>
+                  <button
+                    type="submit"
+                    className="text-sm text-red-600 hover:text-red-800 transition"
+                  >
+                    Delete
+                  </button>
+                </form>
+              </details>
             </div>
           ))
         )}
