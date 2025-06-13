@@ -5,7 +5,6 @@ import BgGradient from "@/components/common/bg-gradient";
 import Link from "next/link";
 import { revalidatePath } from "next/cache";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
 
 export default async function ViewSummariesPage() {
   const { userId } = await auth();
