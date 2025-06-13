@@ -5,7 +5,6 @@ import BgGradient from "@/components/common/bg-gradient";
 import Link from "next/link";
 import { revalidatePath } from "next/cache";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
 
 export default async function ViewSummariesPage() {
   const { userId } = await auth();
@@ -56,9 +55,12 @@ export default async function ViewSummariesPage() {
                 </div>
               </Link>
               <details className="absolute top-2 right-2 z-20">
-                <summary className="cursor-pointer text-gray-600 hover:text-gray-800 p-1 rounded-full bg-white dark:bg-zinc-800 shadow">
+                <summary
+                  className="cursor-pointer text-gray-600 hover:text-gray-800 p-1 rounded-full bg-white dark:bg-zinc-800 shadow list-none [&::-webkit-details-marker]:hidden"
+                >
                   <DotsHorizontalIcon className="h-5 w-5" />
                 </summary>
+
                 <form
                   action={async () => {
                     "use server";
