@@ -5,6 +5,8 @@ import BgGradient from "@/components/common/bg-gradient";
 import Link from "next/link";
 import { revalidatePath } from "next/cache";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
+import { formatDistanceToNow } from "date-fns";
+
 
 export default async function ViewSummariesPage() {
   const { userId } = await auth();
@@ -50,7 +52,7 @@ export default async function ViewSummariesPage() {
                     {summary.file_name}
                   </h3>
                   <p className="text-sm text-gray-500 mt-2">
-                    Created at: {new Date(summary.created_at).toLocaleString()}
+                    {formatDistanceToNow(new Date(summary.created_at), { addSuffix: true })}
                   </p>
                 </div>
               </Link>
