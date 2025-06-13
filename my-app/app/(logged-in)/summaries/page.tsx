@@ -55,9 +55,12 @@ export default async function ViewSummariesPage() {
                 </div>
               </Link>
               <details className="absolute top-2 right-2 z-20">
-                <summary className="cursor-pointer text-gray-600 hover:text-gray-800 p-1 rounded-full bg-white dark:bg-zinc-800 shadow">
+                <summary
+                  className="cursor-pointer text-gray-600 hover:text-gray-800 p-1 rounded-full bg-white dark:bg-zinc-800 shadow list-none [&::-webkit-details-marker]:hidden"
+                >
                   <DotsHorizontalIcon className="h-5 w-5" />
                 </summary>
+
                 <form
                   action={async () => {
                     "use server";
