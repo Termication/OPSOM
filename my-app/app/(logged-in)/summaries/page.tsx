@@ -6,7 +6,8 @@ import Link from "next/link";
 import { revalidatePath } from "next/cache";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { formatDistanceToNow } from "date-fns";
-
+import { toast } from "sonner";
+import { deleteSummary } from "@/actions/delete-summary";
 
 export default async function ViewSummariesPage() {
   const { userId } = await auth();
