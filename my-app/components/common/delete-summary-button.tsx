@@ -1,0 +1,28 @@
+"use client";
+
+import { toast } from "sonner";
+import { useTransition } from "react";
+import { deleteSummary } from "@/actions/delete-summary";
+
+interface Props {
+  summaryId: string;
+}
+
+export function DeleteSummaryButton({ summaryId }: Props) {
+  const [isPending, startTransition] = useTransition();
+
+  return (
+    <button
+      onClick={() =>
+        startTransition(async () => {
+          await deleteSummary(summaryId);
+          toast.success("Summary deleted");
+        })
+      }
+      disabled={isPending}
+      className="text-sm text-red-600 hover:text-red-800 transition disabled:opacity-50"
+    >
+      {isPending ? "Deleting..." : "Delete"}
+    </button>
+  );
+}
