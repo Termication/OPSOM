@@ -11,12 +11,16 @@ interface Props {
 export function DeleteSummaryButton({ summaryId }: Props) {
   const [isPending, startTransition] = useTransition();
 
-  return (
+ return (
     <button
       onClick={() =>
         startTransition(async () => {
-          await deleteSummary(summaryId);
-          toast.success("Summary deleted");
+          try {
+            await deleteSummary(summaryId);
+            toast.success("Summary deleted");
+          } catch (err) {
+            toast.error("Failed to delete summary");
+          }
         })
       }
       disabled={isPending}
