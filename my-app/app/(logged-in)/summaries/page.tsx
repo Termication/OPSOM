@@ -1,9 +1,10 @@
+"use client";
+
 import { auth } from "@clerk/nextjs/server";
 import { getData } from "@/lib/db";
 import { notFound, redirect } from "next/navigation";
 import BgGradient from "@/components/common/bg-gradient";
 import Link from "next/link";
-import { revalidatePath } from "next/cache";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { formatDistanceToNow } from "date-fns";
 import { toast } from "sonner";
@@ -21,12 +22,6 @@ export default async function ViewSummariesPage() {
     ORDER BY created_at DESC;
   `;
 
-  async function handleDelete(id: string) {
-    "use server";
-    const sql = await getData();
-    await sql`DELETE FROM pdf_summaries WHERE id = ${id} AND user_id = ${userId}`;
-    revalidatePath("/summaries");
-  }
 
   return (
     <section className="relative min-h-screen px-4 pt-20">
@@ -66,8 +61,8 @@ export default async function ViewSummariesPage() {
 
                 <form
                   action={async () => {
-                    "use server";
-                    await handleDelete(summary.id);
+                    await deleteSummary(summary.id, userId);
+                    toast.success("Summary deleted");
                   }}
                   className="mt-2 bg-white dark:bg-zinc-800 shadow rounded px-3 py-2"
                 >
@@ -78,6 +73,7 @@ export default async function ViewSummariesPage() {
                     Delete
                   </button>
                 </form>
+
               </details>
             </div>
           ))
