@@ -1,14 +1,11 @@
-"use client";
-
 import { auth } from "@clerk/nextjs/server";
 import { getData } from "@/lib/db";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import BgGradient from "@/components/common/bg-gradient";
 import Link from "next/link";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { formatDistanceToNow } from "date-fns";
-import { toast } from "sonner";
-import { deleteSummary } from "@/actions/delete-summary";
+import { DeleteSummaryButton } from "@/components/common/delete-summary-button";
 
 export default async function ViewSummariesPage() {
   const { userId } = await auth();
@@ -21,7 +18,6 @@ export default async function ViewSummariesPage() {
     WHERE user_id = ${userId}
     ORDER BY created_at DESC;
   `;
-
 
   return (
     <section className="relative min-h-screen px-4 pt-20">
@@ -59,21 +55,9 @@ export default async function ViewSummariesPage() {
                   <DotsHorizontalIcon className="h-5 w-5" />
                 </summary>
 
-                <form
-                  action={async () => {
-                    await deleteSummary(summary.id, userId);
-                    toast.success("Summary deleted");
-                  }}
-                  className="mt-2 bg-white dark:bg-zinc-800 shadow rounded px-3 py-2"
-                >
-                  <button
-                    type="submit"
-                    className="text-sm text-red-600 hover:text-red-800 transition"
-                  >
-                    Delete
-                  </button>
-                </form>
-
+                <div className="mt-2 bg-white dark:bg-zinc-800 shadow rounded px-3 py-2">
+                  <DeleteSummaryButton summaryId={summary.id} />
+                </div>
               </details>
             </div>
           ))
