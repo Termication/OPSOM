@@ -4,7 +4,7 @@ import UploadFormInput from "./upload-form-input";
 import { z } from "zod";
 import { useRef, useState } from "react";
 import { useUploadThing } from '@/utils/uploadthing';
-import { toast } from 'sonner';
+import toast from 'react-hot-toast';
 import { useRouter } from "next/navigation";
 import { generatePdfSummary, storePdfSummary } from "@/actions/upload-actions";
 
@@ -19,15 +19,14 @@ const schema = z.object({
     }),
 });
 
-
 export default function UploadForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
-  let toastId: string | number | undefined;
   const router = useRouter();
+  let toastId = "";
 
   const { startUpload } = useUploadThing('pdfUploader', {
-    onUploadBegin: (fileName) => {
+    onUploadBegin: () => {
       toastId = toast.loading("Uploading file...");
     },
     onClientUploadComplete: () => {
@@ -35,29 +34,28 @@ export default function UploadForm() {
       toast.success("Upload Completed!", {
         duration: 5000,
       });
+
       setTimeout(() => {
-        toast("Processing your PDF...", {
-          description: "Please wait while we summarize your document.",
-          duration: 10000,
+        toast("⏳ Processing your PDF...\nPlease wait while we summarize your document.", {
+          duration: 5000,
         });
       }, 1000);
     },
     onUploadError: () => {
       toast.dismiss(toastId);
-      toast.error("Upload failed!", {
-        description: "Please try again. Ensure the file is a valid PDF and under 20MB.",
-      });
+      toast.error("❌ Upload failed. Ensure it's a valid PDF under 20MB.");
     },
   });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+
     const formData = new FormData(e.currentTarget);
     const file = formData.get("file") as File;
 
     if (!file || !(file instanceof File)) {
-      alert("No file selected or invalid file.");
+      toast.error("❌ No file selected or invalid file.");
       setIsSubmitting(false);
       return;
     }
@@ -65,56 +63,41 @@ export default function UploadForm() {
     const validatedFields = schema.safeParse({ file });
     if (!validatedFields.success) {
       const message = validatedFields.error.flatten().fieldErrors.file?.[0] ?? "Invalid file.";
-      alert(message);
+      toast.error(message);
       setIsSubmitting(false);
       return;
     }
 
     const res = await startUpload([file]);
     if (!res) {
-      toast("Upload failed unexpectedly.", { duration: 5000 });
+      toast.error("❌ Upload failed unexpectedly.");
       setIsSubmitting(false);
       return;
     }
 
     const summary = await generatePdfSummary(res);
-
-    console.log("Summary response:", summary);
-
-
-
     const { data = null, message = null } = summary || {};
+
     if (!data) {
-      toast.error("Error generating summary.", { description: message });
+      toast.error(`❌ Error generating summary. ${message ?? ""}`);
       setIsSubmitting(false);
       return;
-    } else {
-      toast.success("Summary generated successfully!", {
-        description: "Your PDF has been summarized.",
-        duration: 5000,
-      });
-      
     }
 
-    let storeResult: any;
-
     if (data.summary) {
-      storeResult = await storePdfSummary({
-        filename : file.name,
-        fileUrl : res[0].serverData.fileUrl,
-        summary : data.summary,
+      const storeResult = await storePdfSummary({
+        filename: file.name,
+        fileUrl: res[0].serverData.fileUrl,
+        summary: data.summary,
       });
 
-      toast.success("Summary stored successfully!", {
-        description: "Your summary has been saved.",
-        duration: 5000,
-      }); 
+      toast.success("📄 Summary stored successfully!");
 
       formRef.current?.reset();
 
-      // ✅ Redirect to the summary details page
-      if (storeResult?.data?.id) {
-        router.push(`/summary/${storeResult.data.id}`);
+      if (storeResult?.data && "id" in storeResult.data) {
+        const summaryId = storeResult.data.id as string;
+        router.push(`/summary/${summaryId}`);
       }
 
     }
@@ -124,7 +107,11 @@ export default function UploadForm() {
 
   return (
     <section>
-      <UploadFormInput onSubmit={handleSubmit} isSubmitting={isSubmitting} formRef={formRef} />
+      <UploadFormInput
+        onSubmit={handleSubmit}
+        isSubmitting={isSubmitting}
+        formRef={formRef}
+      />
     </section>
   );
 }
