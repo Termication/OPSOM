@@ -1,6 +1,6 @@
 "use client";
 
-import { toast } from "sonner";
+import { toast } from "react-hot-toast";
 import { useTransition } from "react";
 import { deleteSummary } from "@/actions/delete-summary";
 
