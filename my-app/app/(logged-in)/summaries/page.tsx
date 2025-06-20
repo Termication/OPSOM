@@ -1,5 +1,3 @@
-
-
 import { auth } from "@clerk/nextjs/server";
 import { getData } from "@/lib/db";
 import { notFound } from "next/navigation";
@@ -8,6 +6,7 @@ import Link from "next/link";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { formatDistanceToNow } from "date-fns";
 import { DeleteSummaryButton } from "@/components/common/delete-summary-button";
+import { FileText } from "lucide-react";
 
 export default async function ViewSummariesPage() {
   const { userId } = await auth();
@@ -42,9 +41,13 @@ export default async function ViewSummariesPage() {
               <Link href={`/summary/${summary.id}`} className="block">
                 <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 via-pink-500 to-yellow-500 opacity-60 group-hover:opacity-80 transition-opacity duration-500 blur-sm" />
                 <div className="relative z-10 bg-white dark:bg-zinc-900 rounded-2xl p-6 h-full transition-colors duration-300 group-hover:ring-2 group-hover:ring-offset-2 group-hover:ring-indigo-500">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white truncate">
-                    {summary.file_name}
-                  </h3>
+                  <div className="flex items-center gap-2">
+                    <FileText className="w-5 h-5 text-green-600 dark:text-indigo-400" />
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white truncate">
+                      {summary.file_name}
+                    </h3>
+                  </div>
+
                   <p className="text-sm text-gray-500 mt-2">
                     {formatDistanceToNow(new Date(summary.created_at), { addSuffix: true })}
                   </p>
