@@ -1,5 +1,7 @@
 # OPSOM
-## 📄 AI-Powered PDF Uploader
+## 📄 AI-Powered
+
+#### Pdf summarizer
 
 This is a simple Next.js-based PDF uploader that allows users to upload `.pdf` files and sends them to **UploadThing** for processing. The goal is to later extend this into an AI-powered summarizer.
 
@@ -19,7 +21,7 @@ This is a simple Next.js-based PDF uploader that allows users to upload `.pdf` f
   - Zod for validation
   - Langchain
   - Postgres NeonDB
-
+  - date fns js
 
 
 ## 🚀 Getting Started
@@ -29,4 +31,9 @@ This is a simple Next.js-based PDF uploader that allows users to upload `.pdf` f
 ```bash
    git clone https://github.com/Termication/coming soon.git
    cd my-app
+```
+
+2. **Run the app**
+```bash
+ npm run dev
 ```
