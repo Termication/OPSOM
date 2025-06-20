@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import BgGradient from "@/components/common/bg-gradient";
+import { DownloadButton } from "@/components/common/downloadButton";
+
 
 export default async function SummaryDetailPage({ params }: { params: { id: string } }) {
   const { userId } = await auth();
@@ -27,6 +29,10 @@ export default async function SummaryDetailPage({ params }: { params: { id: stri
           ← Back to summaries
         </Link>
       </div>
+
+      {/* ✅ Download Button */}
+      <DownloadButton fileName={summary.file_name} content={summary.summary_text} />
+
 
       {/* Summary Info */}
       <h1 className="text-2xl font-bold mb-2">{summary.file_name}</h1>
