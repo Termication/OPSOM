@@ -84,6 +84,7 @@ export default function UploadForm() {
       return;
     }
 
+
     if (data.summary) {
       const storeResult = await storePdfSummary({
         filename: file.name,
