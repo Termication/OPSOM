@@ -36,7 +36,7 @@ export default function UploadForm() {
       });
 
       setTimeout(() => {
-        toast("⏳ Processing your PDF...\nPlease wait while we summarize your document.", {
+        toast("⏳ Processing your PDF...", {
           duration: 5000,
         });
       }, 1000);
