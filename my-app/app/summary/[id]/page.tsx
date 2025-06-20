@@ -31,8 +31,12 @@ export default async function SummaryDetailPage({ params }: { params: { id: stri
       </div>
 
       {/* ✅ Download Button */}
-      <DownloadButton fileName={summary.file_name} content={summary.summary_text} />
-
+      <DownloadButton
+        fileName={summary.file_name}
+        title={summary.file_name}
+        date={summary.created_at}
+        summary={summary.summary_text}
+      />
 
       {/* Summary Info */}
       <h1 className="text-2xl font-bold mb-2">{summary.file_name}</h1>
