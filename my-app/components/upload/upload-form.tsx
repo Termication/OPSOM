@@ -97,8 +97,7 @@ export default function UploadForm() {
       formRef.current?.reset();
 
       if (storeResult?.data && "id" in storeResult.data) {
-        const summaryId = storeResult.data.id as string;
-        router.push(`/summary/${summaryId}`);
+        router.push(`/summary/${storeResult.data.id}`);
       }
 
     }
