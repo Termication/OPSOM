@@ -6,8 +6,14 @@ import Link from "next/link";
 import BgGradient from "@/components/common/bg-gradient";
 import { DownloadButton } from "@/components/common/downloadButton";
 
+interface SummaryDetailPage {
+  params: {
+    id: string;
+  };
+}
 
-export default async function SummaryDetailPage({ params }: { params: { id: string } }) {
+
+export default async function SummaryDetailPage({ params }: SummaryDetailPage) {
   const { userId } = await auth();
   if (!userId) return notFound();
 
