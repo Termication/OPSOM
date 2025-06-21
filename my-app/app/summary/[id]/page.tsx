@@ -24,19 +24,20 @@ export default async function SummaryDetailPage({ params }: { params: { id: stri
       <BgGradient />
 
       {/* Navigation */}
-      <div className="mb-6">
+      <div className="mb-6 flex items-center justify-between flex-wrap gap-4">
         <Link href="/summaries" className="text-blue-600 hover:text-blue-800 transition-colors">
           ← Back to summaries
         </Link>
+
+        {/* ✅ Download Button */}
+        <DownloadButton
+          fileName={summary.file_name}
+          title={summary.file_name}
+          date={summary.created_at}
+          summary={summary.summary_text}
+        />
       </div>
 
-      {/* ✅ Download Button */}
-      <DownloadButton
-        fileName={summary.file_name}
-        title={summary.file_name}
-        date={summary.created_at}
-        summary={summary.summary_text}
-      />
 
       {/* Summary Info */}
       <h1 className="text-2xl font-bold mb-2">{summary.file_name}</h1>
