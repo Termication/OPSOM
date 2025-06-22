@@ -15,7 +15,7 @@ export default function PricingSection() {
 
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
           {/* Basic Plan */}
-          <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm">
+          <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm transform transition duration-300 hover:scale-[1.03]">
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Basic</h3>
             <p className="mt-2 text-2xl font-bold text-emerald-600">Free</p>
             <ul className="mt-4 text-sm text-gray-700 dark:text-gray-300 space-y-2">
@@ -24,14 +24,14 @@ export default function PricingSection() {
               <li>✅ Standard processing speed</li>
             </ul>
             <button className="mt-6 w-full bg-emerald-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg">
-              Get Started
+              <Link href={"/sign-up"}>Get Started</Link>
             </button>
           </div>
 
           {/* Pro Plan */}
-          <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-md ring-2 ring-green-400">
+          <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-md ring-2 ring-green-400 transform transition duration-300 hover:scale-[1.03]">
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Pro</h3>
-            <p className="mt-2 text-2xl font-bold text-green-600">ZAR 60 / month</p>
+            <p className="mt-2 text-2xl font-bold text-green-600">ZAR 60 / Per month</p>
             <ul className="mt-4 text-sm text-gray-700 dark:text-gray-300 space-y-2">
               <li>✅ Unlimited PDFs</li>
               <li>✅ Priority processing</li>
