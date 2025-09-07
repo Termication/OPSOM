@@ -38,9 +38,7 @@ This is a simple Next.js-based PDF uploader that allows users to upload `.pdf` f
  npm run dev
 ```
 
-
 ## Authors
-
 
 <details>
     <summary>Innocent Karabo Mohlala</summary>
