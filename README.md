@@ -51,3 +51,15 @@ This is a simple Next.js-based PDF uploader that allows users to upload `.pdf` f
     <li><a href="mailto:terminalkarabo@gmail.com">e-mail</a></li>
     </ul>
 
+Opsom License (v1.0)
+
+Permission is hereby granted to use, copy, modify, and distribute this software 
+for personal, educational, or commercial purposes, provided that:
+
+1. Proper credit is given to the original author(s).
+2. This license text is included in all copies or substantial portions of the software.
+3. The software is provided "as is", without warranty of any kind. The author(s) 
+   shall not be held liable for any damages or claims arising from its use.
+
+By using this software, you agree to the terms above.
+
