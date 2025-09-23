@@ -10,6 +10,7 @@ This is a simple Next.js-based PDF uploader that allows users to upload `.pdf` f
 - Upload only valid `.pdf` files
 - Max file size: 20MB
 - Upload progress and completion logs
+- Uses ChatGPT and Gemini alternatively to provide summaries
 - Built with:
   - Next.js (App Router)
   - Log & Sign Up (Clerk)
