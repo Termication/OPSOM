@@ -1,6 +1,8 @@
 # OPSOM
 ## 📄 AI-Powered
 
+[![Screenshot-2025-09-24-at-00-47-13-Summarize-PDFs.png](https://i.postimg.cc/nzv8j2yy/Screenshot-2025-09-24-at-00-47-13-Summarize-PDFs.png)](https://postimg.cc/Q9xYvQxm)
+
 #### Pdf summarizer
 
 This is a simple Next.js-based PDF uploader that allows users to upload `.pdf` files and sends them to **UploadThing** for processing. The goal is to later extend this into an AI-powered summarizer.
