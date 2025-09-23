@@ -30,7 +30,7 @@ This is a simple Next.js-based PDF uploader that allows users to upload `.pdf` f
 1. **Clone the repo**
 
 ```bash
-   git clone https://github.com/Termication/coming soon.git
+   git clone https://github.com/Termication/OPSOM.git
    cd my-app
 ```
 
