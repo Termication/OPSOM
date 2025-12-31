@@ -19,6 +19,7 @@ This is a simple Next.js-based PDF uploader that allows users to upload `.pdf` f
   - TypeScript
   - Tailwind CSS
       - shadcn ui
+      - daisy ui
 
   - UploadThing
   - Zod for validation
